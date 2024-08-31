@@ -27,7 +27,7 @@ class User(Generic):
 
     def add_user_credentials(self, emp_name, user_input, input_pw, input_confirm_pw, added_user_step_name,
                              added_user_screenshot_name, expected_add_user_success_msg):
-        form = self.wait_until_visibility_element_located(self.switch_to_add_user_form)
+        form = self.wait_until_visibility_element_located(self.switch_to_form)
         UserRoleDropdown = form.find_element(*self.user_role_dropdown)
         UserRoleDropdown.click()
         ClickAdminOption = form.find_element(*self.click_admin_option)
@@ -43,7 +43,6 @@ class User(Generic):
         self.send_keys_to_element(self.confirm_pw, input_confirm_pw)
         self.click_on_element(self.save_btn)
         actual_success_msg = self.driver.find_element(*self.Saved_msg).text
-        print(actual_success_msg)
         assert expected_add_user_success_msg == actual_success_msg.strip(), "Adding user process is failed"
         waited = self.wait_until_visibility_element_located(self.user_name_list)
         names_list = waited.find_elements(*self.user_name_list)
@@ -61,7 +60,7 @@ class User(Generic):
                 self.wait_until_visibility_element_located(self.delete_user_btn)
                 self.click_on_element(self.delete_user_btn)
                 actual_deleted_msg = self.driver.find_element(*self.delete_msg).text
-                assert expected_delete_user_success_msg == actual_deleted_msg, "The deletion of user is failed"
+                assert expected_delete_user_success_msg == actual_deleted_msg.strip(), "The deletion of user is failed"
                 break
         leave_page = Leave(self.driver)
         return leave_page

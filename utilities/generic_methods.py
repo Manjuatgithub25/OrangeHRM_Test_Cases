@@ -1,7 +1,9 @@
+import time
 from tkinter.simpledialog import askstring
 import tkinter as tk
 import allure
 from allure_commons.types import AttachmentType
+from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from utilities.baseclass import Locators
@@ -50,4 +52,33 @@ class Generic(Locators):
         userInput = askstring(title, prompt)
         root.destroy()
         return userInput
+
+    def clear_and_send(self, locator_and_value, input_data):
+        input_fieled = self.driver.find_element(*locator_and_value)
+        input_fieled.send_keys(Keys.CONTROL + "a")
+        input_fieled.send_keys(Keys.DELETE)
+        input_fieled.send_keys(input_data)
+
+    def calender(self, year, month, date):
+        form = self.driver.find_element(*self.switch_to_form)
+        Year = form.find_element(*self.year_xpath)
+        Year.click()
+        SelectYear = form.find_elements(*self.select_dropdown)
+        for cal_year in SelectYear:
+            if year == cal_year.text:
+                cal_year.click()
+                break
+        Month = form.find_element(*self.month_xpath)
+        Month.click()
+        SelectMonth = form.find_elements(*self.select_dropdown)
+        for cal_month in SelectMonth:
+            if month == cal_month.text:
+                time.sleep(1)
+                cal_month.click()
+                break
+        Date = form.find_elements(*self.date_xpath)
+        for cal_date in Date:
+            if date == cal_date.text:
+                cal_date.click()
+                break
 
