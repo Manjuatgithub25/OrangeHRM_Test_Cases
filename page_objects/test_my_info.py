@@ -1,5 +1,8 @@
 import time
 
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+
 from utilities.generic_methods import Generic
 
 
@@ -8,12 +11,13 @@ class MyInfo(Generic):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
+        self.w = WebDriverWait(driver, 10)
 
     def click_on_my_info(self):
         self.click_on_element(self.my_info)
 
     def input_personal_details(self, personal_first_name, personal_last_name, emp_id, driver_license_id,
-                               licenseExpiryDate, info_year, info_month, info_date, expected_my_info_success_msg, actual_myinfo_success_msg):
+                               licenseExpiryDate, info_year, info_month, info_date, expected_my_info_success_msg):
         form = self.driver.find_element(*self.switch_to_form)
         time.sleep(2)
         self.clear_and_send(self.first_name, personal_first_name)
@@ -32,10 +36,15 @@ class MyInfo(Generic):
         DOB = form.find_element(*self.dob)
         DOB.click()
         self.calender(info_year, info_month, info_date)
-        time.sleep(5)
+        self.click_on_element(self.calender_close_btn)
         Gender = form.find_element(*self.gender)
+        form.execute_script("arguments[0].scrollIntoView(true);", Gender)
+        time.sleep(3)
         Gender.click()
-        actual_myinfo_success_msg = self.driver.find_element(*self.Saved_msg).text
+        # self.w.until(expected_conditions.element_to_be_clickable(Gender)).click()
+        self.click_on_element(self.save_btn)
+        actual_myinfo_success_msg = self.wait_until_presence_element_located(self.Saved_msg).text
+        print(actual_myinfo_success_msg)
         assert expected_my_info_success_msg == actual_myinfo_success_msg.strip(), "Adding my_info details is failed"
 
 

@@ -27,29 +27,10 @@ class Leave(Generic):
             FromDate = form.find_element(*self.from_date)
             FromDate.click()
             self.calender(Year, Month, Date)
-            # FromDate.send_keys("2024-12-10")
+            time.sleep(1)
             ToDate = form.find_element(*self.to_date)
             ToDate.click()
             self.calender(year, month, date)
-            '''ToDateYear = form.find_element(*self.to_date_year)
-            ToDateYear.click()
-            SelectYear = form.find_elements(*self.select_dropdown)
-            for cal_year in SelectYear:
-                if year == cal_year.text:
-                    cal_year.click()
-                    break
-            ToDateMonth = form.find_element(*self.to_date_month)
-            ToDateMonth.click()
-            SelectMonth = form.find_elements(*self.select_dropdown)
-            for cal_month in SelectMonth:
-                if month == cal_month.text:
-                    cal_month.click()
-                    break
-            ToDateDate = form.find_elements(*self.to_date_date)
-            for cal_date in ToDateDate:
-                if date == cal_date.text:
-                    cal_date.click()
-                    break'''
             ApplyBtn = form.find_element(*self.leave_apply_btn)
             ApplyBtn.click()
             actual_msg = form.find_element(*self.leave_successful_msg).text

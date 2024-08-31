@@ -33,6 +33,6 @@ class Test(Data):
         my_info_page.click_on_my_info()
         my_info_page.input_personal_details(self.personal_first_name, self.personal_last_name, self.emp_id,
                                             self.driver_license_id, self.licenseExpiryDate, self.info_year,
-                                            self.info_month, self.info_date)
+                                            self.info_month, self.info_date, self.expected_my_info_success_msg)
 
         # login_logout.logout()

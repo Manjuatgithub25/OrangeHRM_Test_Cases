@@ -10,6 +10,7 @@ class Locators:
     save_btn = (By.XPATH, "//button[text()=' Save ']")
     first_name = (By.NAME, "firstName")
     last_name = (By.NAME, "lastName")
+    calender_close_btn = (By.XPATH, "//div[@class='oxd-date-input-link --close']")
 
     user_name = (By.XPATH, "//input[@name='username']")
     password = (By.NAME, "password")
@@ -69,7 +70,8 @@ class Locators:
     marital_status = (By.XPATH, "//label[text()='Marital Status']/../../div[2]//div[@class='oxd-select-text-input']")
     marital_status_option = (By.XPATH, "//span[contains(text(), 'Married')]")
     dob = (By.XPATH, "//label[text()='Date of Birth']/../..//i")
-    gender = (By.XPATH, "//div[@class='oxd-radio-wrapper']//input[@value='1']")
+    gender = (By.XPATH, "//div[@class='oxd-radio-wrapper']/label[text()='Female']")
     nationality_option = (By.XPATH, "//div[@role='listbox']/div/span[text()='Indian']")
+    info_save_btn = (By.XPATH, "//button[text()=' Save '][1]")
 
 

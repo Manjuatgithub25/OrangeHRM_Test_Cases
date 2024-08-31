@@ -34,26 +34,7 @@ class Recruitment(Generic):
         DateOfApplication = form.find_element(*self.date_of_application)
         DateOfApplication.click()
         self.calender(recruitment_year, recruitment_month, recruitment_date)
-        '''ToDateYear = form.find_element(*self.to_date_year)
-        ToDateYear.click()
-        SelectYear = form.find_elements(*self.select_dropdown)
-        for cal_year in SelectYear:
-            if recruitment_year == cal_year.text:
-                cal_year.click()
-                break
-        ToDateMonth = form.find_element(*self.to_date_month)
-        ToDateMonth.click()
-        SelectMonth = form.find_elements(*self.select_dropdown)
-        for form.cal_month in SelectMonth:
-            if recruitment_month == form.cal_month.text:
-                form.cal_month.click()
-                break
-        ToDateDate = form.find_elements(*self.to_date_date)
-        for cal_date in ToDateDate:
-            if recruitment_date == cal_date.text:
-                cal_date.click()
-                break'''
-
+        self.click_on_element(self.calender_close_btn)
         self.click_on_element(self.consent_btn)
         self.click_on_element(self.save_btn)
         actual_msg = form.find_element(*self.leave_successful_msg).text

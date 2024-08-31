@@ -73,7 +73,6 @@ class Generic(Locators):
         SelectMonth = form.find_elements(*self.select_dropdown)
         for cal_month in SelectMonth:
             if month == cal_month.text:
-                time.sleep(1)
                 cal_month.click()
                 break
         Date = form.find_elements(*self.date_xpath)
