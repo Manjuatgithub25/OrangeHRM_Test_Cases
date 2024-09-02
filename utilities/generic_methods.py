@@ -1,4 +1,3 @@
-import time
 from tkinter.simpledialog import askstring
 import tkinter as tk
 import allure
@@ -6,7 +5,7 @@ from allure_commons.types import AttachmentType
 from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from utilities.baseclass import Locators
+from Locators.baseclass import Locators
 
 
 class Generic(Locators):

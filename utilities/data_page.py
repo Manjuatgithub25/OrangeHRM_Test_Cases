@@ -1,4 +1,4 @@
-from utilities.baseclass import Locators
+from Locators.baseclass import Locators
 
 
 class Data(Locators):

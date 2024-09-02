@@ -1,5 +1,4 @@
 import time
-
 from page_objects.test_my_info import MyInfo
 from utilities.generic_methods import Generic
 
