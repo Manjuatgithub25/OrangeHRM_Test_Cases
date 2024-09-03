@@ -1,5 +1,8 @@
+import os
+from datetime import datetime
 import pytest
 from selenium import webdriver
+from configuration.config import get_config
 
 
 def pytest_addoption(parser):
@@ -8,12 +11,15 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="class")
 def setup(request):
-    directory_path = "C:\\Users\\manju\\OneDrive\\Documents\\GitHub\\OrangeHRM_Test_Cases\\downloads"
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    home_dir = get_config("path", "home_dir")
+    download_dir = os.path.join(home_dir, f"downloaded_file_{timestamp}")
+    os.makedirs(download_dir, exist_ok=True)
     browser_name = request.config.getoption("--browser_name").lower()
     if browser_name == "chrome":
         option = webdriver.ChromeOptions()
         option.add_experimental_option("prefs", {
-            "download.default_directory": directory_path,  # Set your directory here
+            "download.default_directory": download_dir,
             "download.prompt_for_download": False,
             "directory_upgrade": True,
             "detach": True

@@ -13,7 +13,7 @@ class LoginLogout(Generic):
         self.driver = driver
 
     def login(self):
-        data = data_reader()
+        data = data_reader("login_credentials")
         self.send_keys_to_element(self.user_name, data[0])
         self.send_keys_to_element(self.password, data[1])
         with allure.step("login to the application"):
