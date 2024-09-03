@@ -59,8 +59,9 @@ class Locators:
     keywords = (By.XPATH, "//label[text()='Keywords']/../..//input")
     consent_btn = (By.XPATH, "//i[@class='oxd-icon bi-check oxd-checkbox-input-icon']")
     date_of_application = (By.XPATH, "//label[text()='Date of Application']/../..//i")
+    click_candidates = (By.XPATH, "//a[text()='Candidates']")
     candidate_list = (By.XPATH, "//div[@class='oxd-table-body']/div/div/div[3]/div")
-    download_resume = (By.XPATH, "../following-sibling::div/i[@class='oxd-icon bi-download']")
+    download_resume = (By.XPATH, "../following-sibling::div[4]//i[@class='oxd-icon bi-download']/..")
 
     my_info = (By.XPATH, "//span[text()='My Info']")
     employee_id = (By.XPATH, "//label[text()='Employee Id']/../../div/input")
@@ -70,7 +71,7 @@ class Locators:
     marital_status = (By.XPATH, "//label[text()='Marital Status']/../../div[2]//div[@class='oxd-select-text-input']")
     marital_status_option = (By.XPATH, "//span[contains(text(), 'Married')]")
     dob = (By.XPATH, "//label[text()='Date of Birth']/../..//i")
-    gender = (By.XPATH, "//div[@class='oxd-radio-wrapper']/label[text()='Female']")
+    gender = (By.XPATH, "//label[.='Gender']/../../descendant::label[.='Female']")
     nationality_option = (By.XPATH, "//div[@role='listbox']/div/span[text()='Indian']")
     info_save_btn = (By.XPATH, "//button[text()=' Save '][1]")
 

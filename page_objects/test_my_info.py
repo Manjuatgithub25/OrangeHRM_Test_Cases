@@ -1,5 +1,6 @@
 import time
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -12,6 +13,7 @@ class MyInfo(Generic):
         super().__init__(driver)
         self.driver = driver
         self.w = WebDriverWait(driver, 10)
+        self.a = ActionChains(driver)
 
     def click_on_my_info(self):
         self.click_on_element(self.my_info)
@@ -36,15 +38,12 @@ class MyInfo(Generic):
         DOB = form.find_element(*self.dob)
         DOB.click()
         self.calender(info_year, info_month, info_date)
-        self.click_on_element(self.calender_close_btn)
-        Gender = form.find_element(*self.gender)
-        form.execute_script("arguments[0].scrollIntoView(true);", Gender)
-        time.sleep(3)
-        Gender.click()
-        # self.w.until(expected_conditions.element_to_be_clickable(Gender)).click()
+        gender = form.find_element(*self.gender)
+        self.a.move_to_element(gender).click().perform()
         self.click_on_element(self.save_btn)
         actual_myinfo_success_msg = self.wait_until_presence_element_located(self.Saved_msg).text
         print(actual_myinfo_success_msg)
+        time.sleep(1)
         assert expected_my_info_success_msg == actual_myinfo_success_msg.strip(), "Adding my_info details is failed"
 
 

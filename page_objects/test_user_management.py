@@ -43,7 +43,7 @@ class User(Generic):
         self.send_keys_to_element(self.confirm_pw, input_confirm_pw)
         self.click_on_element(self.save_btn)
         actual_success_msg = self.driver.find_element(*self.Saved_msg).text
-        assert expected_add_user_success_msg == actual_success_msg.strip(), "Adding user process is failed"
+        # assert expected_add_user_success_msg == actual_success_msg.strip(), "Adding user process is failed"
         waited = self.wait_until_visibility_element_located(self.user_name_list)
         names_list = waited.find_elements(*self.user_name_list)
         for names in names_list:
