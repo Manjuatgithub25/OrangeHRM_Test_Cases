@@ -52,7 +52,7 @@ class Locators:
     no_leaves = (By.XPATH, "//p[text()='No Leave Types with Leave Balance']")
 
     click_recruitment = (By.XPATH, "//span[text()='Recruitment']")
-    choose_vacancy = (By.XPATH, "//span[text()='test']")
+    choose_vacancy = (By.XPATH, "//span[text()='QA Engineer']")
     contact_number = (By.XPATH, "//label[text()='Contact Number']/../..//input")
     Email = (By.XPATH, "//label[text()='Email']/../..//input")
     file_input = (By.XPATH, "//input[@class='oxd-file-input']")
