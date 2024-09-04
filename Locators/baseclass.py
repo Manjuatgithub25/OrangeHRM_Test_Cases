@@ -1,7 +1,10 @@
 from selenium.webdriver.common.by import By
 
+from utilities.excel_data_reader import excel_to_dictionary
+
 
 class Locators:
+    data = excel_to_dictionary('recruitment')
 
     """common Xpath's"""
     switch_to_form = (By.XPATH, "//form[@class='oxd-form']")
@@ -11,6 +14,7 @@ class Locators:
     first_name = (By.NAME, "firstName")
     last_name = (By.NAME, "lastName")
     calender_close_btn = (By.XPATH, "//div[@class='oxd-date-input-link --close']")
+    file_input = (By.XPATH, "//input[@class='oxd-file-input']")
 
     user_name = (By.XPATH, "//input[@name='username']")
     password = (By.NAME, "password")
@@ -39,11 +43,8 @@ class Locators:
     apply_page = (By.XPATH, "//h6[@class='oxd-text oxd-text--h6 orangehrm-main-title']")
     from_date = (By.XPATH, "//label[text()='From Date']/../..//i")
     to_date = (By.XPATH, "//label[text()='To Date']/../..//i")
-    # to_date_year = (By.XPATH, "//div[@class='oxd-calendar-selector-year-selected']")
     year_xpath = (By.XPATH, "//div[@class='oxd-calendar-selector-year-selected']")
-    # to_date_month = (By.XPATH, "//div[@class='oxd-calendar-selector-month-selected']")
     month_xpath = (By.XPATH, "//div[@class='oxd-calendar-selector-month-selected']")
-    # to_date_date = (By.XPATH, "//div[@class='oxd-calendar-date']")
     date_xpath = (By.XPATH, "//div[@class='oxd-calendar-date']")
     select_dropdown = (By.XPATH, "//li[contains(@class,'oxd-calendar-dropdown--option')]")
     leave_type_option = (By.XPATH, "//span[text()='CAN - FMLA']")
@@ -52,10 +53,9 @@ class Locators:
     no_leaves = (By.XPATH, "//p[text()='No Leave Types with Leave Balance']")
 
     click_recruitment = (By.XPATH, "//span[text()='Recruitment']")
-    choose_vacancy = (By.XPATH, "//span[text()='test']")
+    choose_vacancy = (By.XPATH, "//span[text()='Software Engineer']")
     contact_number = (By.XPATH, "//label[text()='Contact Number']/../..//input")
     Email = (By.XPATH, "//label[text()='Email']/../..//input")
-    file_input = (By.XPATH, "//input[@class='oxd-file-input']")
     keywords = (By.XPATH, "//label[text()='Keywords']/../..//input")
     consent_btn = (By.XPATH, "//i[@class='oxd-icon bi-check oxd-checkbox-input-icon']")
     date_of_application = (By.XPATH, "//label[text()='Date of Application']/../..//i")
@@ -74,5 +74,9 @@ class Locators:
     gender = (By.XPATH, "//label[.='Gender']/../../descendant::label[.='Female']")
     nationality_option = (By.XPATH, "//div[@role='listbox']/div/span[text()='Indian']")
     info_save_btn = (By.XPATH, "//button[text()=' Save '][1]")
+    attachments = (By.XPATH, "//h6[text()='Attachments']/..//button")
+    attachment_save_btn = (By.XPATH, "//div[@class='orangehrm-attachment']//button[text()=' Save ']")
+    attachments_list = (By.XPATH, "//div[@class='oxd-table-body']/div/div/div[2]")
+    download_file = (By.XPATH, "..//div[@class='oxd-table-cell-actions']/button[3]")
 
 

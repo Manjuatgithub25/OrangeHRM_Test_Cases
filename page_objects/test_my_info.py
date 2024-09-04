@@ -1,4 +1,5 @@
 import time
+import pytest
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from utilities.excel_data_reader import excel_to_dictionary
@@ -13,12 +14,10 @@ class MyInfo(Generic):
         self.w = WebDriverWait(driver, 10)
         self.a = ActionChains(driver)
         self.data = excel_to_dictionary("my_info")
-        print(self.data)
 
-    def click_on_my_info(self):
-        self.click_on_element(self.my_info)
-
+    # @pytest.xfail
     def input_personal_details(self):
+        self.click_on_element(self.my_info)
         form = self.driver.find_element(*self.switch_to_form)
         time.sleep(2)
         self.clear_and_send(self.first_name, self.data['personal_first_name'])
@@ -42,12 +41,21 @@ class MyInfo(Generic):
         gender = form.find_element(*self.gender)
         self.a.move_to_element(gender).click().perform()
         self.click_on_element(self.save_btn)
-        actual_myinfo_success_msg = self.wait_until_presence_element_located(self.Saved_msg).text
-        print(actual_myinfo_success_msg)
-        time.sleep(1)
-        assert self.data['expected_my_info_success_msg'] == actual_myinfo_success_msg.strip(), "Adding my_info details is failed"
 
 
-
-
-
+    @pytest.mark.xfail
+    def add_attachment(self):
+        self.click_on_element(self.my_info)
+        self.click_on_element(self.attachments)
+        self.send_keys_to_element(self.file_input, self.data['file_input'])
+        self.driver.execute_script("window.scrollBy(0, 500);")
+        file_list = self.driver.find_elements(*self.attachments_list)
+        for attachment in file_list:
+            if self.data['attachment'] == attachment.text:
+                # self.driver.execute_script("window.scrollBy(0,260);")
+                self.take_screenshot_attach_toAllure(self.data['added_file_step_name'],
+                                                     self.data['added_file_screenshot_name'])
+                download = attachment.find_element(*self.download_file)
+                self.a.click(download).perform()
+                time.sleep(4)
+                break

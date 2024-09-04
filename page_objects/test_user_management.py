@@ -15,13 +15,9 @@ class User(Generic):
         self.driver = driver
         self.data = excel_to_dictionary("user_management")
 
-    def click_admin(self):
-        self.click_on_element(self.admin)
-
-    def add_user_btn(self):
-        self.click_on_element(self.add_btn)
-
     def add_user_credentials(self):
+        self.click_on_element(self.admin)
+        self.click_on_element(self.add_btn)
         form = self.wait_until_visibility_element_located(self.switch_to_form)
         UserRoleDropdown = form.find_element(*self.user_role_dropdown)
         UserRoleDropdown.click()
@@ -37,8 +33,6 @@ class User(Generic):
         self.send_keys_to_element(self.pw, self.data['input_pw'])
         self.send_keys_to_element(self.confirm_pw, self.data['input_confirm_pw'])
         self.click_on_element(self.save_btn)
-        actual_success_msg = self.driver.find_element(*self.Saved_msg).text
-        # assert expected_add_user_success_msg == actual_success_msg.strip(), "Adding user process is failed"
         waited = self.wait_until_visibility_element_located(self.user_name_list)
         names_list = waited.find_elements(*self.user_name_list)
         for names in names_list:
@@ -55,8 +49,6 @@ class User(Generic):
                 names.find_element(*self.delete_user).click()
                 self.wait_until_visibility_element_located(self.delete_user_btn)
                 self.click_on_element(self.delete_user_btn)
-                # actual_deleted_msg = self.driver.find_element(*self.delete_msg).text assert self.data[
-                # 'expected_delete_user_success_msg'] == actual_deleted_msg.strip(), "The deletion of user is failed"
                 break
         leave_page = Leave(self.driver)
         return leave_page

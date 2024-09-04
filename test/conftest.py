@@ -12,7 +12,7 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="class")
 def setup(request):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    home_dir = get_config("path", "home_dir")
+    home_dir = get_config("path", "home_dir") + '\\downloads'
     download_dir = os.path.join(home_dir, f"downloaded_file_{timestamp}")
     os.makedirs(download_dir, exist_ok=True)
     browser_name = request.config.getoption("--browser_name").lower()
@@ -37,4 +37,4 @@ def setup(request):
     driver.implicitly_wait(5)
     request.cls.driver = driver
     yield
-    # driver.close()
+    driver.close()
