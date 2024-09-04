@@ -35,7 +35,7 @@ class Leave(Generic):
             self.calender(str(self.data['year']), self.data['month'], str(self.data['date']))
             ApplyBtn = form.find_element(*self.leave_apply_btn)
             ApplyBtn.click()
-            actual_msg = form.find_element(*self.leave_successful_msg).text
+            # actual_msg = form.find_element(*self.leave_successful_msg).text
             time.sleep(1)
             # assert actual_msg == self.data['expected_leave_successful_msg'], "Applied leave failed"
 

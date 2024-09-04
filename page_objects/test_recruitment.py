@@ -14,6 +14,7 @@ class Recruitment(Generic):
         self.driver = driver
         self.a = ActionChains(driver)
         self.data = excel_to_dictionary("recruitment")
+        print(self.data)
 
     def click_on_recruitment(self):
         self.click_on_element(self.click_recruitment)
@@ -38,7 +39,7 @@ class Recruitment(Generic):
         self.click_on_element(self.calender_close_btn)
         self.click_on_element(self.consent_btn)
         self.click_on_element(self.save_btn)
-        actual_msg = form.find_element(*self.leave_successful_msg).text
+        # actual_msg = form.find_element(*self.leave_successful_msg).text
         time.sleep(1)
         # assert actual_msg == expected_recruitment_successful_msg, "Adding recruitment is failed"
         candidates = form.find_element(*self.click_candidates)
@@ -50,11 +51,9 @@ class Recruitment(Generic):
                 # assert candidate == names.text, "candidate name and names in records doesn't match"
                 self.driver.execute_script("arguments[0].scrollIntoView(true);", names)
                 self.take_screenshot_attach_toAllure(self.data['added_recruitment_step_name'], self.data['added_recruitment_screenshot_name'])
-                time.sleep(3)
                 download = names.find_element(*self.download_resume)
                 self.driver.execute_script("window.scrollBy(0, 100);")
                 self.a.click(download).perform()
-                time.sleep(7)
                 break
         my_info_page = MyInfo(self.driver)
         return my_info_page

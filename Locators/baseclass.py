@@ -52,7 +52,7 @@ class Locators:
     no_leaves = (By.XPATH, "//p[text()='No Leave Types with Leave Balance']")
 
     click_recruitment = (By.XPATH, "//span[text()='Recruitment']")
-    choose_vacancy = (By.XPATH, "//span[text()='QA Engineer']")
+    choose_vacancy = (By.XPATH, "//span[text()='test']")
     contact_number = (By.XPATH, "//label[text()='Contact Number']/../..//input")
     Email = (By.XPATH, "//label[text()='Email']/../..//input")
     file_input = (By.XPATH, "//input[@class='oxd-file-input']")
@@ -66,7 +66,7 @@ class Locators:
     my_info = (By.XPATH, "//span[text()='My Info']")
     employee_id = (By.XPATH, "//label[text()='Employee Id']/../../div/input")
     driver_license = (By.XPATH, "//label[contains(text(), 'License Number')]/../../div/input")
-    license_expiry_date = (By.XPATH, "//label[text()='License Expiry Date']/../..//input")
+    license_expiry_date = (By.XPATH, "//label[text()='License Expiry Date']/../..//i")
     nationality = (By.XPATH, "//label[text()='Nationality']/../../div[2]//div[@class='oxd-select-text-input']")
     marital_status = (By.XPATH, "//label[text()='Marital Status']/../../div[2]//div[@class='oxd-select-text-input']")
     marital_status_option = (By.XPATH, "//span[contains(text(), 'Married')]")

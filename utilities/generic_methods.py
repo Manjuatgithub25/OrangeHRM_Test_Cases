@@ -1,3 +1,4 @@
+import time
 from tkinter.simpledialog import askstring
 import tkinter as tk
 import allure
@@ -69,6 +70,7 @@ class Generic(Locators):
                 break
         Month = form.find_element(*self.month_xpath)
         Month.click()
+        time.sleep(2)
         SelectMonth = form.find_elements(*self.select_dropdown)
         for cal_month in SelectMonth:
             if month == cal_month.text:

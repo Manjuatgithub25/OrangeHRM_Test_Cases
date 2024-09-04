@@ -17,6 +17,7 @@ def data_reader(sheet_name):
 def excel_to_dictionary(sheet_name):
     df = pd.read_excel('C:/Users/manju/OneDrive/Desktop/data.xlsx', sheet_name=sheet_name, engine='openpyxl')
     data_dict = dict(zip(df['variable'], df['value']))
-    return data_dict
+    data = {key.strip(): value.strip() if isinstance(value, str) else value for key, value in data_dict.items()}
+    return data
 
 

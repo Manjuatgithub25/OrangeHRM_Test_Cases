@@ -1,5 +1,7 @@
 import pytest
 from page_objects.test_login import LoginLogout
+from page_objects.test_my_info import MyInfo
+from page_objects.test_recruitment import Recruitment
 
 
 @pytest.mark.usefixtures("setup")
@@ -16,6 +18,7 @@ class Test:
         Recruitment_page = leave_page.input_leave_details()
         Recruitment_page.click_on_recruitment()
         my_info_page = Recruitment_page.input_recruitment_details()
+        my_info_page = MyInfo(self.driver)
         my_info_page.click_on_my_info()
         my_info_page.input_personal_details()
         login_logout.logout()
