@@ -74,9 +74,10 @@ class Locators:
     gender = (By.XPATH, "//label[.='Gender']/../../descendant::label[.='Female']")
     nationality_option = (By.XPATH, "//div[@role='listbox']/div/span[text()='Indian']")
     info_save_btn = (By.XPATH, "//button[text()=' Save '][1]")
-    attachments = (By.XPATH, "//h6[text()='Attachments']/..//button")
+    attachments = (By.XPATH, "//h6[text()='Attachments']/..//i")
     attachment_save_btn = (By.XPATH, "//div[@class='orangehrm-attachment']//button[text()=' Save ']")
     attachments_list = (By.XPATH, "//div[@class='oxd-table-body']/div/div/div[2]")
     download_file = (By.XPATH, "..//div[@class='oxd-table-cell-actions']/button[3]")
+    info_input_file = (By.XPATH, "//label[text()='Select File']/../../div/input")
 
 

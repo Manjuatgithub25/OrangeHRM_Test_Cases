@@ -5,7 +5,9 @@ from configuration.config import get_config
 
 def data_reader(sheet_name):
     data = []
-    workbook = openpyxl.load_workbook('C:/Users/manju/OneDrive/Desktop/test_data/data.xlsx')
+    home_dir = get_config("path", 'home_dir')
+    file_path = home_dir + '\\test_data\\data.xlsx'
+    workbook = openpyxl.load_workbook(file_path)
     sheet = workbook[sheet_name]
     total_rows = sheet.max_row
     total_columns = sheet.max_column
@@ -18,11 +20,11 @@ def data_reader(sheet_name):
 def excel_to_dictionary(sheet_name):
     home_dir = get_config("path", 'home_dir')
     file_path = home_dir + '\\test_data\\data.xlsx'
-    print(file_path)
     df = pd.read_excel(file_path, sheet_name=sheet_name, engine='openpyxl')
     data_dict = dict(zip(df['variable'], df['value']))
     data = {key.strip(): value.strip() if isinstance(value, str) else value for key, value in data_dict.items()}
     return data
 
 
+print(excel_to_dictionary('my_info'))
 

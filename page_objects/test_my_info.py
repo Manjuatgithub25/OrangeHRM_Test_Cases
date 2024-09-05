@@ -42,17 +42,16 @@ class MyInfo(Generic):
         self.a.move_to_element(gender).click().perform()
         self.click_on_element(self.save_btn)
 
-
-    @pytest.mark.xfail
     def add_attachment(self):
-        self.click_on_element(self.my_info)
+        # self.click_on_element(self.my_info)
+        time.sleep(4)
+        self.driver.execute_script("window.scrollBy(0, 400);")
         self.click_on_element(self.attachments)
-        self.send_keys_to_element(self.file_input, self.data['file_input'])
-        self.driver.execute_script("window.scrollBy(0, 500);")
+        self.send_keys_to_element(self.file_input, self.data['file_path'])
+        self.click_on_element(self.attachment_save_btn)
         file_list = self.driver.find_elements(*self.attachments_list)
         for attachment in file_list:
             if self.data['attachment'] == attachment.text:
-                # self.driver.execute_script("window.scrollBy(0,260);")
                 self.take_screenshot_attach_toAllure(self.data['added_file_step_name'],
                                                      self.data['added_file_screenshot_name'])
                 download = attachment.find_element(*self.download_file)
