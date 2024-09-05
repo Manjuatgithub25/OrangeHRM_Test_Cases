@@ -34,7 +34,7 @@ class Leave(Generic):
             ApplyBtn = form.find_element(*self.leave_apply_btn)
             ApplyBtn.click()
 
-        except AssertionError as e:
+        except AssertionError:
             print(self.driver.find_element(*self.no_leaves).text)
 
         finally:
