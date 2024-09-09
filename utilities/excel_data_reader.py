@@ -25,6 +25,3 @@ def excel_to_dictionary(sheet_name):
     data = {key.strip(): value.strip() if isinstance(value, str) else value for key, value in data_dict.items()}
     return data
 
-
-print(excel_to_dictionary('my_info'))
-
