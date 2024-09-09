@@ -14,14 +14,6 @@ def setup(request):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     home_dir = get_config("path", "home_dir") + '\\downloads'
     download_dir = os.path.join(home_dir, f"downloaded_file_{timestamp}")
-
-    if not os.path.exists(download_dir):
-        os.makedirs(download_dir)
-        print(f"Created directory: {download_dir}")
-    else:
-        print(f"Directory already exists: {download_dir}")
-
-    download_dir = os.path.join(download_dir, f"downloaded_file_{timestamp}")
     os.makedirs(download_dir, exist_ok=True)
 
     browser_name = request.config.getoption("--browser_name").lower()

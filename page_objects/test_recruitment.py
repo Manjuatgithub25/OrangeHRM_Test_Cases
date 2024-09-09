@@ -42,8 +42,7 @@ class Recruitment(Generic):
                     self.driver.execute_script("window.scrollBy(0,260);")
                     self.take_screenshot_attach_toAllure(self.data['added_recruitment_step_name'], self.data['added_recruitment_screenshot_name'])
                     download = names.find_element(*self.download_resume)
-                    self.a.click(download).perform()
-                    time.sleep(4)
+                    self.a.move_to_element(download).click(download).perform()
                     break
 
         except Exception as e:
