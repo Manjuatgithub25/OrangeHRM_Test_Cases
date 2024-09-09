@@ -67,7 +67,8 @@ class Locators:
     employee_id = (By.XPATH, "//label[text()='Employee Id']/../../div/input")
     driver_license = (By.XPATH, "//label[contains(text(), 'License Number')]/../../div/input")
     license_expiry_date = (By.XPATH, "//label[text()='License Expiry Date']/../..//i")
-    nationality = (By.XPATH, "//label[text()='Nationality']/../../div[2]")
+    nationality = (By.XPATH, "//label[text()='Nationality']/../..//div[@class='oxd-select-text "
+                             "oxd-select-text--active']")
     marital_status = (By.XPATH, "//label[text()='Marital Status']/../../div[2]//div[@class='oxd-select-text-input']")
     marital_status_option = (By.XPATH, "//span[contains(text(), 'Married')]")
     dob = (By.XPATH, "//label[text()='Date of Birth']/../..//i")
