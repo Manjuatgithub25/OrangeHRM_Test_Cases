@@ -1,7 +1,5 @@
 import time
-
 from selenium.webdriver.support.wait import WebDriverWait
-
 from page_objects.test_recruitment import Recruitment
 from utilities.excel_data_reader import excel_to_dictionary
 from utilities.generic_methods import Generic
