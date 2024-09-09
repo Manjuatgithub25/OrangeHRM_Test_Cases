@@ -29,6 +29,7 @@ class MyInfo(Generic):
         self.click_on_element(self.calender_close_btn)
         NationalityBtn = form.find_element(*self.nationality)
         self.a.move_to_element(NationalityBtn).click(NationalityBtn).perform()
+        self.driver.execute_script("window.scrollBy(0, 150);")
         nationality_options = form.find_element(*self.nationality_option)
         time.sleep(2)
         nationality_options.click()
