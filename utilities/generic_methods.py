@@ -2,6 +2,8 @@ import time
 from tkinter.simpledialog import askstring
 import tkinter as tk
 import allure
+import pytest
+import pytest_html
 from allure_commons.types import AttachmentType
 from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -81,4 +83,23 @@ class Generic(Locators):
             if date == cal_date.text:
                 cal_date.click()
                 break
+
+    def take_screenshot(self, name):
+        screenshot_file = f"{name}.png"
+        self.driver.save_screenshot(screenshot_file)
+        return screenshot_file
+
+    @pytest.hookimpl(hookwrapper=True)
+    def pytest_runtest_makereport(item, call):
+        outcome = yield
+        report = outcome.get_result()
+
+        if report.when == "call" and report.failed:
+            driver = item.funcargs['setup']
+            screenshot_file = Generic.take_screenshot(driver, report.nodeid.replace("::", "_"))
+            extra = getattr(report, 'extra', [])
+            extra.append(pytest_html.extras.image(screenshot_file))
+            report.extra = extra
+
+
 

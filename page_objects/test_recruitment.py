@@ -39,7 +39,7 @@ class Recruitment(Generic):
             names_list = self.driver.find_elements(*self.candidate_list)
             for names in names_list:
                 if self.data['candidate'] == names.text:
-                    self.driver.execute_script("window.scrollBy(0,260);")
+                    self.driver.execute_script("window.scrollBy(0,300);")
                     self.take_screenshot_attach_toAllure(self.data['added_recruitment_step_name'], self.data['added_recruitment_screenshot_name'])
                     download = names.find_element(*self.download_resume)
                     self.a.move_to_element(download).click(download).perform()
