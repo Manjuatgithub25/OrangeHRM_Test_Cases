@@ -2,8 +2,6 @@ import time
 from tkinter.simpledialog import askstring
 import tkinter as tk
 import allure
-import pytest
-import pytest_html
 from allure_commons.types import AttachmentType
 from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC

@@ -1,8 +1,6 @@
 import time
 import allure
 from allure_commons.types import AttachmentType
-
-from locators.logger import TestLogger
 from page_objects.test_user_management import User
 from utilities.excel_data_reader import data_reader
 from utilities.generic_methods import Generic
