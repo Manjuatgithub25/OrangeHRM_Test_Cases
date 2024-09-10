@@ -1,5 +1,4 @@
 import pytest
-from requests import request
 from page_objects.test_login import LoginLogout
 
 
@@ -8,7 +7,7 @@ class Test:
 
     def test_run(self):
         login_logout = LoginLogout(self.driver)
-        user_management = login_logout.login(request)
+        user_management = login_logout.login()
         user_management.add_user_credentials()
         leave_page = user_management.delete_user_from_users_list()
         Recruitment_page = leave_page.input_leave_details()

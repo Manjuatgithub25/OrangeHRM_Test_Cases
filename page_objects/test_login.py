@@ -14,7 +14,7 @@ class LoginLogout(Generic):
         self.data = data_reader("login_credentials")
         # self.test_logger = TestLogger(self.driver)
 
-    def login(self, request):
+    def login(self):
         self.send_keys_to_element(self.user_name, self.data[0])
         self.send_keys_to_element(self.password, self.data[1])
         with allure.step("login to the application"):
