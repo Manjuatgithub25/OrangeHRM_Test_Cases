@@ -14,7 +14,7 @@ class LoginLogout(Generic):
         super().__init__(driver)
         self.driver = driver
         self.data = data_reader("login_credentials")
-        self.test_logger = TestLogger(self.driver)
+        # self.test_logger = TestLogger(self.driver)
 
     def login(self, request):
         self.send_keys_to_element(self.user_name, self.data[0])
