@@ -1,4 +1,4 @@
-import logging
+'''import logging
 import inspect
 from datetime import datetime
 import pytest
@@ -59,6 +59,6 @@ class TestLogger:
                 # Get the extra attribute and append the image with log message
                 extra = getattr(extra, 'extra', [])
                 extra.append(pytest_html.extras.image(screenshot_file, message=log_message))
-                request.node._report.extra = extra
+                request.node._report.extra = extra'''
 
 
