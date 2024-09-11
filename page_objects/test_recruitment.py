@@ -11,6 +11,7 @@ class Recruitment(Generic):
         super().__init__(driver)
         self.driver = driver
         self.a = ActionChains(driver)
+        self.logger = self.setup_logger()
         self.data = excel_to_dictionary("recruitment")
 
     def input_recruitment_details(self):
@@ -35,6 +36,7 @@ class Recruitment(Generic):
             self.click_on_element(self.calender_close_btn)
             self.click_on_element(self.consent_btn)
             self.click_on_element(self.save_btn)
+            self.logger.info("Recruitment details are saved")
             self.click_on_element(self.click_candidates)
             names_list = self.driver.find_elements(*self.candidate_list)
             for names in names_list:
@@ -43,6 +45,7 @@ class Recruitment(Generic):
                     self.take_screenshot_attach_toAllure(self.data['added_recruitment_step_name'], self.data['added_recruitment_screenshot_name'])
                     download = names.find_element(*self.download_resume)
                     self.a.move_to_element(download).click(download).perform()
+                    self.logger.info("Resume successfully downloaded")
                     break
 
         except Exception as e:

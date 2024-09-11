@@ -11,6 +11,7 @@ class Leave(Generic):
         super().__init__(driver)
         self.driver = driver
         self.w = WebDriverWait(driver, 10)
+        self.logger = self.setup_logger()
         self.data = excel_to_dictionary("leave")
 
     def input_leave_details(self):
@@ -31,6 +32,7 @@ class Leave(Generic):
             self.calender(self.data['year'], self.data['month'], self.data['date'])
             ApplyBtn = form.find_element(*self.leave_apply_btn)
             ApplyBtn.click()
+            self.logger.info("Leave successfully applied")
 
         except AssertionError:
             print(self.driver.find_element(*self.no_leaves).text)

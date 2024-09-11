@@ -13,6 +13,7 @@ class MyInfo(Generic):
         self.driver = driver
         self.w = WebDriverWait(driver, 10)
         self.a = ActionChains(driver)
+        self.logger = self.setup_logger()
         self.data = excel_to_dictionary("my_info")
 
     # @pytest.xfail
@@ -42,6 +43,7 @@ class MyInfo(Generic):
         gender = form.find_element(*self.gender)
         self.a.move_to_element(gender).click().perform()
         self.click_on_element(self.save_btn)
+        self.logger.info("user information has been successfully added")
 
     def add_attachment(self):
         # self.click_on_element(self.my_info)
@@ -57,5 +59,6 @@ class MyInfo(Generic):
                                                      self.data['added_file_screenshot_name'])
                 download = attachment.find_element(*self.download_file)
                 self.a.click(download).perform()
+                self.logger.info("attachment is successfully added and downloaded")
                 time.sleep(4)
                 break

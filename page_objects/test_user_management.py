@@ -13,6 +13,7 @@ class User(Generic):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
+        self.logger = self.setup_logger()
         self.data = excel_to_dictionary("user_management")
 
     def add_user_credentials(self):
@@ -33,6 +34,7 @@ class User(Generic):
         self.send_keys_to_element(self.pw, self.data['input_pw'])
         self.send_keys_to_element(self.confirm_pw, self.data['input_confirm_pw'])
         self.click_on_element(self.save_btn)
+        self.logger.info("User Successfully Saved")
         waited = self.wait_until_visibility_element_located(self.user_name_list)
         names_list = waited.find_elements(*self.user_name_list)
         for names in names_list:
@@ -49,6 +51,7 @@ class User(Generic):
                 names.find_element(*self.delete_user).click()
                 self.wait_until_visibility_element_located(self.delete_user_btn)
                 self.click_on_element(self.delete_user_btn)
+                self.logger.info("User Successfully Deleted")
                 break
         leave_page = Leave(self.driver)
         return leave_page

@@ -1,7 +1,11 @@
+import logging
 import time
+from datetime import datetime
+from pathlib import Path
 from tkinter.simpledialog import askstring
 import tkinter as tk
 import allure
+import pytest
 from allure_commons.types import AttachmentType
 from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -82,5 +86,53 @@ class Generic(Locators):
                 cal_date.click()
                 break
 
+    def setup_logger(self):
+        logger = logging.getLogger(__name__)
+        filehandler = logging.FileHandler("logfile.log")
+        formatter = logging.Formatter("%(asctime)s :%(levelname)s :%(name)s: %(message)s")
+        filehandler.setFormatter(formatter)
+        logger.addHandler(filehandler)
+        logger.setLevel(logging.INFO)
+        return logger
 
+    def capture_screenshot(self, name):
+        """Capture a screenshot and save it to the 'Screenshots' folder."""
+        screenshot_dir = Path('Screenshots')
+        screenshot_dir.mkdir(exist_ok=True)  # Ensure the directory exists
+        screenshot_path = screenshot_dir / name
+        self.driver.get_screenshot_as_file(str(screenshot_path))  # Ensure self.driver is accessible
 
+    @pytest.hookimpl(hookwrapper=True)
+    def pytest_runtest_makereport(self, item, call):
+        print("hook is being called")
+        timestamp = datetime.now().strftime('%H-%M-%S')
+        pytest_html = item.config.pluginmanager.getplugin('html')
+        outcome = yield
+        report = outcome.get_result()
+        extra = getattr(report, 'extra', [])
+
+        if report.when == 'call':
+            feature_request = item.funcargs.get('request', None)
+            if feature_request:
+                driver = feature_request.getfuncargvalue('browser')
+                screenshot_path = f'C:/Users/manju/OneDrive/Documents/GitHub/OrangeHRM_Test_Cases/Screenshots/login_successful{timestamp}.png'
+                driver.save_screenshot(screenshot_path)
+                extra.append(pytest_html.extras.image(screenshot_path))
+
+                # Add additional content if test fails or is skipped
+                xfail = hasattr(report, 'wasxfail')
+                if (report.skipped and xfail) or (report.failed and not xfail):
+                    extra.append(pytest_html.extras.image(screenshot_path))
+                    extra.append(pytest_html.extras.html('<div>Additional HTML</div>'))
+
+                report.extra = extra
+
+            try:
+                with open('logfile.log', 'r') as log_file:
+                    log_content = log_file.read()
+                    html = f'<pre>{log_content}</pre>'
+                    extra.append(pytest_html.extras.html(html))
+            except FileNotFoundError:
+                print("Log file not found, unable to attach logs to the report.")
+
+            report.extra = extra
